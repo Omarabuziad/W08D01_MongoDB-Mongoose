@@ -1,6 +1,9 @@
 const express = require("express");
+
 const todoModel = require("./schema");
+
 const db = require("./db");
+
 
 const app = express();
 app.use(express.json());
@@ -12,23 +15,14 @@ app.delete("/delete/todo", (req, res) => {});
 
 
 const toDo = new todoModel({
-  task ,
+  task,
   description,
  deadline,
   isCompleted,
   priority,
 });
 
-// using promisees to save a user
-toDo
-  .save()
-  .then((result) => {
-    res.json(result);
-  })
-  .catch((err) => {
-    res.send(err);
-});
-
+// using promisees to save a toDo
 
 
 
