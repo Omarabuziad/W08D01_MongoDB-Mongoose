@@ -19,6 +19,24 @@ app.get("/todos", (req, res) => {
 
 });
 
+
+app.get("/todos/completed", (req, res) => {
+
+
+  todoModel.find({isCompleted : true })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+
+
+});
+
+
+
+
 app.post("/create/todo", (req, res) => {
 
   const { task , description, deadline, isCompleted, priority } = req.body;
@@ -45,7 +63,28 @@ app.post("/create/todo", (req, res) => {
 
 
 
-app.put("/update/todo", (req, res) => {});
+
+
+app.put("/update/todo/:task", (req, res) => {
+  const newTask = req.params.task
+
+  const { task , description, deadline, isCompleted, priority } = req.body;
+
+  //toDo.update({ task: task }, { description }, fn);
+
+  todoModel
+  .findOneAndUpdate({task:newTask} ,{description} , {new:true})
+  .then((result1) => {
+    res.json(result1);
+  })
+  .catch((err) => {
+    res.json(err);
+  });
+
+
+})
+
+
 app.delete("/delete/todo", (req, res) => {});
 
 
